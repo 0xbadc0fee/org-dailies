@@ -1,0 +1,120 @@
+#+TITLE:Dailies Journal
+#+AUTHOR: Silas Curfman
+#+OPTIONS: \n:t
+#+OPTIONS: html-style:nil
+#+OPTIONS: org-html-head-include-default-style:nil
+#+SETUPFILE: theme-readtheorg.setup
+* Telematics Training (Day 1)
+NOTE: These are internal meeting / training notes for STW Technic purposes only.
+** Attended
+- Brent K. : presenter
+- Tiffany G
+- Kyle B.
+- Zac D.
+- Silas C.
+** Prerequisites
+*** Software [3/3]
+- [X] Windows or Linux dev environment
+- [X] Serial terminal (i.e. Tera Term, Putty)
+- [X] IMX Updater
+*** Hardware [6/6]
+- [X] TCG4
+- [X] TCG Breakout Dock
+- [X] Startech.com USB <-> RS232 cable
+- [X] DB9 gender swapper
+- [X] USB thumb drives
+- [X] Power / USB / Network cables
+** Training Topics / Minutes
+#+TOC: headlines 1 local
+*** Summary / Review
+- GOAL: Walkthrough and review basic flashing methods, necessary tools, dependencies, common troubleshooting, etc
+*** Boot up and Flashing
+Note:  Command and control of device is done via SERIAL, data transfer is via either USB or ETHERNET.  SERIAL is necessary in order to interact with device regardless of whether flash txfr will be done via USB or ETHERNET.
+**** Toolchain
+- [ ] Select appropriate .ZIP files
+  + [[https://drive.google.com/file/d/1_nFp7-n5JQ0Z2DmRpctblgyMZszpFLYf/view?usp=drive_link][Crocodile]]
+  + [[https://drive.google.com/file/d/13jhSkQdAPCfSJuAIRO9EFZt-Ldm-MAOP/view?usp=drive_link][Dingo]]
+  + [[https://drive.google.com/file/d/1GaUAlgGim-LCqV4dDJy6pF19YrpBvMD6/view?usp=drive_link][Firefly]]
+  + [[https://drive.google.com/file/d/1sCFWdRbR-FfwY2YgVUs_kwdArWh_xFUh/view?usp=drive_link][Impala]]
+  + [[https://drive.google.com/file/d/1XVqgZVW-j5L-g5-sMHr-EPEmcqMR_Jvx/view?usp=drive_link][Jellyfish]]
+**** Flashing - USB
+- Currently very dependent on USB hardware.  New, faster read write USB's can flash UBOOT but often fail when flashing the rest of the data.
+**** Flashing - Ethernet
+- Currently more reliable than USB.
+- Utilizes TFTP
+- Requires network connection from Host to TCG4
+- May require additional firwall permissions and whitelisting TFTP app.
+**** Flashing - Other
+- Technically possible to flash via serial but would take far too long ( >24hrs)
+- Legacy method, used to be an option, no longer reasonable.
+*** Connecting via Serial
+Test serial access (115200 baud, 8 data bits, Parity = none, Stop Bits = 1, F/C = none)
+  - Tera Term is most stable
+  - PUTTY = OK, but some occasional issues, good backup though
+*** Enabling subsystems
+Note: all necessary changes can be done by edits to files in the /etc folder.
+1. Connect via Serial
+2. Log in
+3. Disable timeout
+   #+begin_src sh :results output
+  ~ $ unset TMOUT
+#+end_src
+4. Make user changes if necessary
+#+begin_src
+  ~ $ sudo su
+#+end_src
+1. Configure Networking (LAN)
+   1. Enable Interface(s)
+      1. /etc/eth.conf = ethernet interface
+      2. /etc/wlan.conf = wireless interface
+      3. /etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)
+      4. NOTE: be sure each device can ping the other, both must see the other.
+   2. Dynamic IP Option (see manual section 5.4)
+   #+begin_src SHELL
+   ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_DHCP ipv4.method auto 
+         #+end_src
+   1. Static IP Option (see manual section 5.4)
+   #+begin_src SHELL
+   ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_STATIC ip4 192.168.1.77/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.1 ipv4.method manual
+   #+end_src
+   
+2. Configure Networking (WLAN)
+   1. Ensure interface enabled
+   2. use nmcli command to configure and start Access Point
+      #+begin_src SHELL
+    ~ $ nmcli con add type wifi ifname wlan0 autoconnect yes ssid $(hostname) 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.addresses 192.168.7.1/24 ipv4.method shared wifi-sec.key-mgmt wpa-psk wifi-sec.psk TEST12345 wifi-sec.group ccmp wifi-sec.pairwise ccmp con-name WIFI_STATIC
+      #+end_src
+3. Validation Checks [0/12]
+   - [ ] service ETHERNET enabled ?
+   - [ ] service WIFI enabled ?
+   - [ ] service SSH enabled ?
+   - [ ] interface lan0 up ?
+   - [ ] interface wlan0 up ?
+   - [ ] added new LAN connection via nmcli ?
+   - [ ] added new WIFI connection via nmcli ?
+   - [ ] ~ $ nmcli con show  shows connections active
+   - [ ] ping from TCG to HOST via LAN = OK ?
+   - [ ] ping from HOST to TCG via LAN = OK ?
+   - [ ] ping from TCG to HOST via WIFI = OK ?
+   - [ ] ping from HOST to TCG via WIFI = OK ?
+
+Footnotes:
+- Shell codes above are for reference only.  You will need to make your own edits to ADDRESS, GATEWAY, DNS, etc.  The code shown above ran correctly at the time of this edit.
+- watch for ascii artifacts when operating in command line over serial connection.  Poor connection can generate unwanted ascii characters in terminal during use.
+- In case of misconfigured nmcli interface use (nmcli connection delete "CON-NAME") and reconfigure.
+
+*** Connect to TCG via Wifi
+*** Connect to TCG via Ethernet
+*** Setup Build ENV
+*** Building an application
+*** Tranfer Application
+**** via SCP
+**** via NSF
+*** Running applications
+*** Linux basics
+*** Startup scripts
+*** TAF Overview
+*** ydatad
+*** webserver
+*** overlays
+*** REACH

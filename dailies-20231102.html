@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-11-02 Thu 15:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dailies Journal</title>
+<meta name="author" content="Silas Curfman" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Dailies Journal</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga1043a8">1. Telematics Training (Day 1)</a>
+<ul>
+<li><a href="#org424c113">1.1. Attended</a></li>
+<li><a href="#org3fe401c">1.2. Prerequisites</a>
+<ul>
+<li><a href="#org84d3dd4">1.2.1. Software <code>[3/3]</code></a></li>
+<li><a href="#org8e3dd08">1.2.2. Hardware <code>[6/6]</code></a></li>
+</ul>
+</li>
+<li><a href="#org2fa350e">1.3. Training Topics / Minutes</a>
+<ul>
+<li><a href="#orge70afa8">1.3.1. Summary / Review</a></li>
+<li><a href="#orgf086658">1.3.2. Boot up and Flashing</a></li>
+<li><a href="#org52345a9">1.3.3. Connecting via Serial</a></li>
+<li><a href="#org8596cb7">1.3.4. Enabling subsystems</a></li>
+<li><a href="#org33703d9">1.3.5. Connect to TCG via Wifi</a></li>
+<li><a href="#org86b55ed">1.3.6. Connect to TCG via Ethernet</a></li>
+<li><a href="#org699f135">1.3.7. Setup Build ENV</a></li>
+<li><a href="#org412efe6">1.3.8. Building an application</a></li>
+<li><a href="#org75e498b">1.3.9. Tranfer Application</a></li>
+<li><a href="#org49e3734">1.3.10. Running applications</a></li>
+<li><a href="#org76536df">1.3.11. Linux basics</a></li>
+<li><a href="#orgeccabd2">1.3.12. Startup scripts</a></li>
+<li><a href="#org4cb8530">1.3.13. TAF Overview</a></li>
+<li><a href="#org7f4eed5">1.3.14. ydatad</a></li>
+<li><a href="#org231fd45">1.3.15. webserver</a></li>
+<li><a href="#org7f3c687">1.3.16. overlays</a></li>
+<li><a href="#org5f00c91">1.3.17. REACH</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga1043a8" class="outline-2">
+<h2 id="orga1043a8"><span class="section-number-2">1.</span> Telematics Training (Day 1)</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+NOTE: These are internal meeting / training notes for STW Technic purposes only.<br />
+</p>
+</div>
+<div id="outline-container-org424c113" class="outline-3">
+<h3 id="org424c113"><span class="section-number-3">1.1.</span> Attended</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Brent K. : presenter<br /></li>
+<li>Tiffany G<br /></li>
+<li>Kyle B.<br /></li>
+<li>Zac D.<br /></li>
+<li>Silas C.<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3fe401c" class="outline-3">
+<h3 id="org3fe401c"><span class="section-number-3">1.2.</span> Prerequisites</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org84d3dd4" class="outline-4">
+<h4 id="org84d3dd4"><span class="section-number-4">1.2.1.</span> Software <code>[3/3]</code></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li class="on"><code>[X]</code> Windows or Linux dev environment<br /></li>
+<li class="on"><code>[X]</code> Serial terminal (i.e. Tera Term, Putty)<br /></li>
+<li class="on"><code>[X]</code> IMX Updater<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8e3dd08" class="outline-4">
+<h4 id="org8e3dd08"><span class="section-number-4">1.2.2.</span> Hardware <code>[6/6]</code></h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li class="on"><code>[X]</code> TCG4<br /></li>
+<li class="on"><code>[X]</code> TCG Breakout Dock<br /></li>
+<li class="on"><code>[X]</code> Startech.com USB &lt;-&gt; RS232 cable<br /></li>
+<li class="on"><code>[X]</code> DB9 gender swapper<br /></li>
+<li class="on"><code>[X]</code> USB thumb drives<br /></li>
+<li class="on"><code>[X]</code> Power / USB / Network cables<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org2fa350e" class="outline-3">
+<h3 id="org2fa350e"><span class="section-number-3">1.3.</span> Training Topics / Minutes</h3>
+<div class="outline-text-3" id="text-1-3">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge70afa8">1.3.1. Summary / Review</a></li>
+<li><a href="#orgf086658">1.3.2. Boot up and Flashing</a></li>
+<li><a href="#org52345a9">1.3.3. Connecting via Serial</a></li>
+<li><a href="#org8596cb7">1.3.4. Enabling subsystems</a></li>
+<li><a href="#org33703d9">1.3.5. Connect to TCG via Wifi</a></li>
+<li><a href="#org86b55ed">1.3.6. Connect to TCG via Ethernet</a></li>
+<li><a href="#org699f135">1.3.7. Setup Build ENV</a></li>
+<li><a href="#org412efe6">1.3.8. Building an application</a></li>
+<li><a href="#org75e498b">1.3.9. Tranfer Application</a></li>
+<li><a href="#org49e3734">1.3.10. Running applications</a></li>
+<li><a href="#org76536df">1.3.11. Linux basics</a></li>
+<li><a href="#orgeccabd2">1.3.12. Startup scripts</a></li>
+<li><a href="#org4cb8530">1.3.13. TAF Overview</a></li>
+<li><a href="#org7f4eed5">1.3.14. ydatad</a></li>
+<li><a href="#org231fd45">1.3.15. webserver</a></li>
+<li><a href="#org7f3c687">1.3.16. overlays</a></li>
+<li><a href="#org5f00c91">1.3.17. REACH</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge70afa8" class="outline-4">
+<h4 id="orge70afa8"><span class="section-number-4">1.3.1.</span> Summary / Review</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li>GOAL: Walkthrough and review basic flashing methods, necessary tools, dependencies, common troubleshooting, etc<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf086658" class="outline-4">
+<h4 id="orgf086658"><span class="section-number-4">1.3.2.</span> Boot up and Flashing</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Note:  Command and control of device is done via SERIAL, data transfer is via either USB or ETHERNET.  SERIAL is necessary in order to interact with device regardless of whether flash txfr will be done via USB or ETHERNET.<br />
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgcacc00d"></a>Toolchain<br />
+<div class="outline-text-5" id="text-1-3-2-1">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Select appropriate .ZIP files<br />
+<ul class="org-ul">
+<li><a href="https://drive.google.com/file/d/1_nFp7-n5JQ0Z2DmRpctblgyMZszpFLYf/view?usp=drive_link">Crocodile</a><br /></li>
+<li><a href="https://drive.google.com/file/d/13jhSkQdAPCfSJuAIRO9EFZt-Ldm-MAOP/view?usp=drive_link">Dingo</a><br /></li>
+<li><a href="https://drive.google.com/file/d/1GaUAlgGim-LCqV4dDJy6pF19YrpBvMD6/view?usp=drive_link">Firefly</a><br /></li>
+<li><a href="https://drive.google.com/file/d/1sCFWdRbR-FfwY2YgVUs_kwdArWh_xFUh/view?usp=drive_link">Impala</a><br /></li>
+<li><a href="https://drive.google.com/file/d/1XVqgZVW-j5L-g5-sMHr-EPEmcqMR_Jvx/view?usp=drive_link">Jellyfish</a><br /></li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="org96a5cd8"></a>Flashing - USB<br />
+<div class="outline-text-5" id="text-1-3-2-2">
+<ul class="org-ul">
+<li>Currently very dependent on USB hardware.  New, faster read write USB's can flash UBOOT but often fail when flashing the rest of the data.<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org856b549"></a>Flashing - Ethernet<br />
+<div class="outline-text-5" id="text-1-3-2-3">
+<ul class="org-ul">
+<li>Currently more reliable than USB.<br /></li>
+<li>Utilizes TFTP<br /></li>
+<li>Requires network connection from Host to TCG4<br /></li>
+<li>May require additional firwall permissions and whitelisting TFTP app.<br /></li>
+</ul>
+</div>
+</li>
+<li><a id="org8be236a"></a>Flashing - Other<br />
+<div class="outline-text-5" id="text-1-3-2-4">
+<ul class="org-ul">
+<li>Technically possible to flash via serial but would take far too long ( &gt;24hrs)<br /></li>
+<li>Legacy method, used to be an option, no longer reasonable.<br /></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org52345a9" class="outline-4">
+<h4 id="org52345a9"><span class="section-number-4">1.3.3.</span> Connecting via Serial</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Test serial access (115200 baud, 8 data bits, Parity = none, Stop Bits = 1, F/C = none)<br />
+</p>
+<ul class="org-ul">
+<li>Tera Term is most stable<br /></li>
+<li>PUTTY = OK, but some occasional issues, good backup though<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8596cb7" class="outline-4">
+<h4 id="org8596cb7"><span class="section-number-4">1.3.4.</span> Enabling subsystems</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Note: all necessary changes can be done by edits to files in the /etc folder.<br />
+</p>
+<ol class="org-ol">
+<li>Connect via Serial<br /></li>
+<li>Log in<br /></li>
+<li><p>
+Disable timeout<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">~ $ unset TMOUT
+</pre>
+</div></li>
+<li>Make user changes if necessary<br /></li>
+</ol>
+<pre class="example">
+~ $ sudo su
+</pre>
+<ol class="org-ol">
+<li><p>
+Configure Networking (LAN)<br />
+</p>
+<ol class="org-ol">
+<li>Enable Interface(s)<br />
+<ol class="org-ol">
+<li>/etc/eth.conf = ethernet interface<br /></li>
+<li>/etc/wlan.conf = wireless interface<br /></li>
+<li>/etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)<br /></li>
+<li>NOTE: be sure each device can ping the other, both must see the other.<br /></li>
+</ol></li>
+<li>Dynamic IP Option (see manual section 5.4)<br /></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-SHELL">~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_DHCP ipv4.method auto 
+</pre>
+</div>
+<ol class="org-ol">
+<li>Static IP Option (see manual section 5.4)<br /></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-SHELL">~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_STATIC ip4 192.168.1.77/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.1 ipv4.method manual
+</pre>
+</div></li>
+
+<li>Configure Networking (WLAN)<br />
+<ol class="org-ol">
+<li>Ensure interface enabled<br /></li>
+<li><p>
+use nmcli command to configure and start Access Point<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-SHELL">~ $ nmcli con add type wifi ifname wlan0 autoconnect yes ssid $(hostname) 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.addresses 192.168.7.1/24 ipv4.method shared wifi-sec.key-mgmt wpa-psk wifi-sec.psk TEST12345 wifi-sec.group ccmp wifi-sec.pairwise ccmp con-name WIFI_STATIC
+</pre>
+</div></li>
+</ol></li>
+<li>Validation Checks <code>[0/12]</code><br />
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> service ETHERNET enabled ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> service WIFI enabled ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> service SSH enabled ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> interface lan0 up ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> interface wlan0 up ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> added new LAN connection via nmcli ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> added new WIFI connection via nmcli ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> ~ $ nmcli con show  shows connections active<br /></li>
+<li class="off"><code>[&#xa0;]</code> ping from TCG to HOST via LAN = OK ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> ping from HOST to TCG via LAN = OK ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> ping from TCG to HOST via WIFI = OK ?<br /></li>
+<li class="off"><code>[&#xa0;]</code> ping from HOST to TCG via WIFI = OK ?<br /></li>
+</ul></li>
+</ol>
+
+<p>
+Footnotes:<br />
+</p>
+<ul class="org-ul">
+<li>Shell codes above are for reference only.  You will need to make your own edits to ADDRESS, GATEWAY, DNS, etc.  The code shown above ran correctly at the time of this edit.<br /></li>
+<li>watch for ascii artifacts when operating in command line over serial connection.  Poor connection can generate unwanted ascii characters in terminal during use.<br /></li>
+<li>In case of misconfigured nmcli interface use (nmcli connection delete "CON-NAME") and reconfigure.<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org33703d9" class="outline-4">
+<h4 id="org33703d9"><span class="section-number-4">1.3.5.</span> Connect to TCG via Wifi</h4>
+</div>
+<div id="outline-container-org86b55ed" class="outline-4">
+<h4 id="org86b55ed"><span class="section-number-4">1.3.6.</span> Connect to TCG via Ethernet</h4>
+</div>
+<div id="outline-container-org699f135" class="outline-4">
+<h4 id="org699f135"><span class="section-number-4">1.3.7.</span> Setup Build ENV</h4>
+</div>
+<div id="outline-container-org412efe6" class="outline-4">
+<h4 id="org412efe6"><span class="section-number-4">1.3.8.</span> Building an application</h4>
+</div>
+<div id="outline-container-org75e498b" class="outline-4">
+<h4 id="org75e498b"><span class="section-number-4">1.3.9.</span> Tranfer Application</h4>
+<div class="outline-text-4" id="text-1-3-9">
+</div>
+<ol class="org-ol">
+<li><a id="org3a02887"></a>via SCP<br /></li>
+<li><a id="orgd1149d2"></a>via NSF<br /></li>
+</ol>
+</div>
+<div id="outline-container-org49e3734" class="outline-4">
+<h4 id="org49e3734"><span class="section-number-4">1.3.10.</span> Running applications</h4>
+</div>
+<div id="outline-container-org76536df" class="outline-4">
+<h4 id="org76536df"><span class="section-number-4">1.3.11.</span> Linux basics</h4>
+</div>
+<div id="outline-container-orgeccabd2" class="outline-4">
+<h4 id="orgeccabd2"><span class="section-number-4">1.3.12.</span> Startup scripts</h4>
+</div>
+<div id="outline-container-org4cb8530" class="outline-4">
+<h4 id="org4cb8530"><span class="section-number-4">1.3.13.</span> TAF Overview</h4>
+</div>
+<div id="outline-container-org7f4eed5" class="outline-4">
+<h4 id="org7f4eed5"><span class="section-number-4">1.3.14.</span> ydatad</h4>
+</div>
+<div id="outline-container-org231fd45" class="outline-4">
+<h4 id="org231fd45"><span class="section-number-4">1.3.15.</span> webserver</h4>
+</div>
+<div id="outline-container-org7f3c687" class="outline-4">
+<h4 id="org7f3c687"><span class="section-number-4">1.3.16.</span> overlays</h4>
+</div>
+<div id="outline-container-org5f00c91" class="outline-4">
+<h4 id="org5f00c91"><span class="section-number-4">1.3.17.</span> REACH</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Silas Curfman</p>
+<p class="date">Created: 2023-11-02 Thu 15:55</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
