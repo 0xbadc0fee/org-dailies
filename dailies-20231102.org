@@ -1,9 +1,6 @@
 #+TITLE:Dailies Journal
 #+AUTHOR: Silas Curfman
-#+OPTIONS: \n:t
-#+OPTIONS: html-style:nil
-#+OPTIONS: org-html-head-include-default-style:nil
-#+SETUPFILE: theme-readtheorg.setup
+#+SETUPFILE: mytheme.setup
 * Telematics Training (Day 1)
 NOTE: These are internal meeting / training notes for STW Technic purposes only.
 ** Attended
@@ -25,7 +22,7 @@ NOTE: These are internal meeting / training notes for STW Technic purposes only.
 - [X] USB thumb drives
 - [X] Power / USB / Network cables
 ** Training Topics / Minutes
-#+TOC: headlines 1 local
+#+TOC: headlines 3 local
 *** Summary / Review
 - GOAL: Walkthrough and review basic flashing methods, necessary tools, dependencies, common troubleshooting, etc
 *** Boot up and Flashing
@@ -37,6 +34,16 @@ Note:  Command and control of device is done via SERIAL, data transfer is via ei
   + [[https://drive.google.com/file/d/1GaUAlgGim-LCqV4dDJy6pF19YrpBvMD6/view?usp=drive_link][Firefly]]
   + [[https://drive.google.com/file/d/1sCFWdRbR-FfwY2YgVUs_kwdArWh_xFUh/view?usp=drive_link][Impala]]
   + [[https://drive.google.com/file/d/1XVqgZVW-j5L-g5-sMHr-EPEmcqMR_Jvx/view?usp=drive_link][Jellyfish]]
+**** Flashing - ALL
+- All firmware flashing methods for the TCG require the device be power cycled within 10 seconds of initiating the update process.  Universal steps include:
+  1. Pre-establish a direct SERIAL connection between the HOST pc and the TCG
+  2. Select a suitable data transfer method, either USB or TFTP (network)
+  3. From the desired firmware ZIP file launch the IMX UPDATER tool
+  4. Confirm the updater tool is configured for the correct COM port.
+  5. When ready, select 'Start Update' within the IMX UPDATER tool.
+  6. WITHIN 10 SEC, power cycle the attached TCG unit.
+  7. If successful, the debug window of the IMX UPDATER will interupt the normal boot up process and apply the updates before the OS is loaded.  Successful updating will be followed by an 'Update process terminated successfully' message in the debug window.
+- If you receive a 'COMINT' error, be sure the COM port is not being used by any other tools such as Putty or Tera Term during the update process.
 **** Flashing - USB
 - Currently very dependent on USB hardware.  New, faster read write USB's can flash UBOOT but often fail when flashing the rest of the data.
 **** Flashing - Ethernet
@@ -56,35 +63,34 @@ Note: all necessary changes can be done by edits to files in the /etc folder.
 1. Connect via Serial
 2. Log in
 3. Disable timeout
-   #+begin_src sh :results output
-  ~ $ unset TMOUT
-#+end_src
+   #+begin_src shell
+     ~ $ unset TMOUT
+   #+end_src
 4. Make user changes if necessary
-#+begin_src
-  ~ $ sudo su
-#+end_src
-1. Configure Networking (LAN)
+   #+begin_src shell
+     ~ $ sudo su
+   #+end_src
+5. Configure Networking (LAN)
    1. Enable Interface(s)
       1. /etc/eth.conf = ethernet interface
       2. /etc/wlan.conf = wireless interface
       3. /etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)
       4. NOTE: be sure each device can ping the other, both must see the other.
    2. Dynamic IP Option (see manual section 5.4)
-   #+begin_src SHELL
-   ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_DHCP ipv4.method auto 
-         #+end_src
-   1. Static IP Option (see manual section 5.4)
-   #+begin_src SHELL
-   ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_STATIC ip4 192.168.1.77/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.1 ipv4.method manual
+       #+begin_src shell
+     ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_DHCP ipv4.method auto 
    #+end_src
-   
-2. Configure Networking (WLAN)
+   3. Static IP Option (see manual section 5.4)
+       #+begin_src shell
+     ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_STATIC ip4 192.168.1.77/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.1 ipv4.method manual
+   #+end_src
+6. Configure Networking (WLAN)
    1. Ensure interface enabled
    2. use nmcli command to configure and start Access Point
-      #+begin_src SHELL
-    ~ $ nmcli con add type wifi ifname wlan0 autoconnect yes ssid $(hostname) 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.addresses 192.168.7.1/24 ipv4.method shared wifi-sec.key-mgmt wpa-psk wifi-sec.psk TEST12345 wifi-sec.group ccmp wifi-sec.pairwise ccmp con-name WIFI_STATIC
-      #+end_src
-3. Validation Checks [0/12]
+   #+begin_src shell
+     ~ $ nmcli con add type wifi ifname wlan0 autoconnect yes ssid $(hostname) 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.addresses 192.168.7.1/24 ipv4.method shared wifi-sec.key-mgmt wpa-psk wifi-sec.psk TEST12345 wifi-sec.group ccmp wifi-sec.pairwise ccmp con-name WIFI_STATIC
+   #+end_src
+7. Validation Checks [0/12]
    - [ ] service ETHERNET enabled ?
    - [ ] service WIFI enabled ?
    - [ ] service SSH enabled ?
@@ -97,12 +103,10 @@ Note: all necessary changes can be done by edits to files in the /etc folder.
    - [ ] ping from HOST to TCG via LAN = OK ?
    - [ ] ping from TCG to HOST via WIFI = OK ?
    - [ ] ping from HOST to TCG via WIFI = OK ?
-
 Footnotes:
 - Shell codes above are for reference only.  You will need to make your own edits to ADDRESS, GATEWAY, DNS, etc.  The code shown above ran correctly at the time of this edit.
 - watch for ascii artifacts when operating in command line over serial connection.  Poor connection can generate unwanted ascii characters in terminal during use.
 - In case of misconfigured nmcli interface use (nmcli connection delete "CON-NAME") and reconfigure.
-
 *** Connect to TCG via Wifi
 *** Connect to TCG via Ethernet
 *** Setup Build ENV
