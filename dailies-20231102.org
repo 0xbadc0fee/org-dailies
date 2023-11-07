@@ -86,7 +86,33 @@ Note: all necessary changes can be done by edits to files in the /etc folder.
           ETH_ENABLE=ON
         #+end_src
       - /etc/wlan.conf = wireless interface
+        #+begin_src sh
+          [user] etc $ head wlan.conf
+          # /etc/wlan.conf
+          #
+          # ----------------------------------------------------------------
+          # Configuration file for the wireless local area network interface
+          # ----------------------------------------------------------------
+
+          # Enable or disable wlan interface
+          # WLAN_ENABLE=ON --> activate, else deactivate
+          # Default: WLAN_ENABLE=OFF
+          WLAN_ENABLE=ON
+        #+end_src
       - /etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)
+        #+begin_src sh
+          [user] etc $ head ssh.conf
+          # /etc/ssh.conf
+          #
+          # -----------------------------------------
+          # Configuration file for the ssh
+          # -----------------------------------------
+
+          # SSH=ON activate, else deactivate
+          # To configure sshd please look into /etc/ssh/sshd_config file.
+          # Default: SSH_ENABLE=OFF
+          SSH_ENABLE=ON
+        #+end_src
       - NOTE: be sure each device can ping the other, both must see the other.
    2. Dynamic IP Option (see manual section 5.4)
        #+begin_src shell
