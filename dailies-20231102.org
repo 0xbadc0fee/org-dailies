@@ -1,6 +1,6 @@
 #+TITLE:Dailies Journal
 #+AUTHOR: Silas Curfman
-#+SETUPFILE: mytheme.setup
+#+SETUPFILE: theme-readtheorg.setup
 * Telematics Training (Day 1)
 NOTE: These are internal meeting / training notes for STW Technic purposes only.
 ** Attended
@@ -72,10 +72,22 @@ Note: all necessary changes can be done by edits to files in the /etc folder.
    #+end_src
 5. Configure Networking (LAN)
    1. Enable Interface(s)
-      1. /etc/eth.conf = ethernet interface
-      2. /etc/wlan.conf = wireless interface
-      3. /etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)
-      4. NOTE: be sure each device can ping the other, both must see the other.
+      - /etc/eth.conf = ethernet interface
+        #+begin_src sh
+          [user] etc $ head eth.conf
+          # /etc/eth.conf
+          #
+          # -----------------------------------------------
+          # Configuration file for the Ethernet interfaces
+          # -----------------------------------------------
+
+          # ETH_ENABLE=ON activate, else deactivate
+          # Default: ETH_ENABLE=OFF
+          ETH_ENABLE=ON
+        #+end_src
+      - /etc/wlan.conf = wireless interface
+      - /etc/ssh.conf = ssh configuration (possible reboot necessary to generate key pairs)
+      - NOTE: be sure each device can ping the other, both must see the other.
    2. Dynamic IP Option (see manual section 5.4)
        #+begin_src shell
      ~ $ nmcli con add type ethernet ifname eth0 autoconnect yes con-name WIRED_DHCP ipv4.method auto 
